@@ -1,3 +1,7 @@
+body {
+	width :100%;
+}
+
 .button_link, .button {
 	font-weight:bold;
 	background-color:blue;

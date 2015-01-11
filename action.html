@@ -1,0 +1,173 @@
+<html>
+    <head>
+        <title>
+           Magical Math
+        </title>
+        <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+        <script src ="SimpleMathGame.js"></script>
+    </head>
+    <body>
+        <div id='container'>
+            <div id='equation' style='margin:40px'>
+                <span id='first_number'></span>
+                <span id='oporater'></span>
+                <span id='second_number'></span>
+                <span id='eqauls'>=</span>
+                <span id='guess'></span>
+            </div>
+            <div id='linkList'>
+                 <a class='button_link' id='guess_0'>0</a>
+                 <a class='button_link' id='guess_1'>1</a>
+                 <a class='button_link' id='guess_2'>2</a>
+                 <a class='button_link' id='guess_3'>3</a>
+                 <a class='button_link' id='guess_4'>4</a>
+                 <a class='button_link' id='guess_5'>5</a>
+                 <a class='button_link' id='guess_6'>6</a>
+                 <a class='button_link' id='guess_7'>7</a>
+                 <a class='button_link' id='guess_8'>8</a>
+                 <a class='button_link' id='guess_9'>9</a>
+          </div>
+              <a id='make_guess' class='button'>make guess</a>
+        </div>
+        <script>
+
+        //gets the sets from saved
+        var first_number = localStorage.getItem('set');
+        //gets the holder from page
+        var first_number_holder = document.getElementById('first_number');
+        //puts the value in the holder
+
+        first_number = first_number.replace('set_','');
+        first_number_holder.innerHTML = first_number;
+
+        //gets the catagory from saved
+        var oporater = localStorage.getItem('catagory');
+        var mOp;
+        //gets the holder from page
+
+
+        if(oporater === 'addition'){
+            oporater = '+';
+            mOp = 'add';
+        } else if(oporater === 'multiplication'){
+            oporater = 'x';
+            mOp = 'multiply';
+        }
+        var oporater_holder = document.getElementById('oporater');
+
+        //puts the value in the holder
+        oporater_holder.innerHTML = oporater;
+
+
+        /*****
+        ADDED BY CLINT
+        ***/
+        //adds the engine to the game
+        var MG = new SimpleMathGame('Magical Math',{
+          range : [1,12],
+          constant : first_number, //this will get pulled from localstorage
+          operator : mOp, //this will get pulled from local storage as well
+          random : false,
+          incorrectLimit : 4
+        });
+
+        //Starts the engine up
+        var eq = MG.start();
+
+        //Puts the second number of the equation in the number
+        var second_number_holder = document.getElementById('second_number');
+        var second_number = eq.equation.second_number;
+        second_number_holder.innerHTML = second_number;
+
+
+
+        var loadEquation = function(e){
+          var f = document.getElementById('first_number');
+          var o = document.getElementById('oporater');
+          var s = document.getElementById('second_number');
+          var v = document.getElementById('guess');
+
+          if(e.equation.operator === 'add'){
+            oporater = '+';
+          } else if(oporater === 'multiply'){
+            oporater = 'x';
+          }
+
+          f.innerHTML = e.equation.first_number;
+          o.innerHTML = oporater;
+          s.innerHTML = e.equation.second_number;
+          v.innerHTML = '';
+          v.data = '';
+        };
+
+        var guessButton = document.getElementById('make_guess');
+        guessButton.addEventListener('click', function(){
+          var value = document.getElementById('guess');
+          attempt(value.innerHTML);
+        });
+
+        var attempt = function(value){
+          
+          var results = MG.evaluateQuestion(value);
+
+          alert(results.result);
+
+          if(results.result !== 'win' && results.result !=='lose'){
+            loadEquation(results.nextQuestion);
+          } else {
+            alert('You '+results.result+'! At this point you will be redirected');
+          }
+        };
+
+        var update = function(id,value){
+          //sets the value
+          var n = value.data+String(id);
+
+          //if the value is too long trim it
+          if(n.length > 4){
+            var n = n.substring(0, n.length-1);
+          }
+
+          //add the values to the equation
+          value.innerHTML = n;
+          value.data = n;
+        };
+
+        /****
+        TO HERE
+        ****/
+
+        //When an item is clicked on
+        var putNumber = function(){
+           var num = this.id.replace('guess_','');
+
+           var guess = document.getElementById('guess');
+           var orgNum = guess.innerHTML;
+           if(!orgNum){
+               orgNum = '';
+           }
+
+           var n = String(orgNum)+String(num);
+
+           //added by clint
+           //if the length of the guess is greater then 40
+           //then cut off the last number
+           if(n.length > 3){
+               var n = n.substring(0, n.length-1);
+           }
+
+           guess.innerHTML = n;
+        };
+
+        //gets the links
+        var links = document.getElementsByClassName('button_link');
+
+        //loops through links
+        for(var i = 0; i < links.length; i++){
+
+            //listens for clicks
+            links[i].addEventListener('click', putNumber);
+        }
+        </script>
+    </body>
+</html>

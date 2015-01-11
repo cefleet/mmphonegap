@@ -1,0 +1,43 @@
+.button_link, .button {
+	font-weight:bold;
+	background-color:blue;
+	padding: 18px;
+	color:#efefef;
+	border-radius: 10px; 
+
+}
+
+#make_guess {
+   margin:20px;
+}
+
+#linkList {
+    margin:40px;
+}
+
+#first_number {
+    font-size:400%;
+    font-weight:bold;
+}
+
+#oporater{
+    font-size:400%;
+      font-weight:bold;
+}
+
+#second_number{
+    font-size:400%;
+     font-weight:bold; 
+}
+
+#eqauls {
+    font-size:400%;
+     font-weight:bold;
+}
+
+#guess {
+font-size:400%;
+font-weight:bold;
+    
+}    
+    

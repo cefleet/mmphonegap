@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>
+            Magical Math
+        </title>
+        <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+    </head>
+    <body>
+        <div id='container'>
+            <h1>Choose A Catagory</h1>
+            <div id='linkList'>
+                <a class='button_link' id='multiplication'>multiplication</a>
+                <h2>or</h2>
+                <a class='button_link' id='addition'>addition</a>
+            </div>
+        </div>
+    </body>
+    <script>
+    
+        //a function to save the sets
+        var saveCatagory = function(){
+                
+            //sets local storage 
+            localStorage.setItem('catagory',this.id);
+                
+            //goes to next pages
+            window.location.href = 'choose_set.html';
+                
+        };
+        
+        //gets the links
+        var links = document.getElementsByClassName('button_link');
+        
+        //loops through links   
+        for(var i = 0; i < links.length; i++){
+            
+            //listens for clicks
+            links[i].addEventListener('click', saveCatagory);
+        }
+    </script>
+</html>

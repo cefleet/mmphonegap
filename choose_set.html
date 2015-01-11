@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>
+            Magical Math
+        </title>
+        <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+    </head>
+    <body>
+        <div id='container'>
+          <h1>Choose a Set</h1>
+          <div id='linkList'></div>
+             <a class='button_link' id='set_1'>1</a>
+             <a class='button_link' id='set_2'>2</a>
+             <a class='button_link' id='set_3'>3</a>
+             <a class='button_link' id='set_4'>4</a>
+             <a class='button_link' id='set_5'>5</a>
+             <a class='button_link' id='set_6'>6</a> 
+             <a class='button_link' id='set_7'>7</a>
+             <a class='button_link' id='set_8'>8</a>
+             <a class='button_link' id='set_9'>9</a>
+             <a class='button_link' id='set_10'>10</a>
+             <a class='button_link' id='set_11'>11</a>
+             <a class='button_link' id='set_12'>12</a>
+          </div>
+        </div>
+    </body> 
+    <script>
+         //a function to save the sets
+        var saveSet = function(){
+                
+            //sets local storage 
+            localStorage.setItem('set',this.id);
+                
+            //goes to next page
+            window.location.href = 'action.html';
+                
+        };
+        
+        //gets the links
+        var links = document.getElementsByClassName('button_link');
+        
+        //loops through links   
+        for(var i = 0; i < links.length; i++){
+            
+            //listens for clicks
+            links[i].addEventListener('click', saveSet);
+        }
+    
+    </script>
+</html>

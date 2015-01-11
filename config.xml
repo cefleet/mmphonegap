@@ -14,10 +14,10 @@
     </description>
 
     <author email="meredith@gmail.com">
-        Meredith Morris & Eva Barnett
+        Meredith Morris and Eva Barnett
     </author>
     <gap:platform name="android" />
     <preference name="fullscreen" value="true" />
     <preference name="orientation" value="landscape" />
-<preference name="phonegap-version" value="3.6.3" />
+    <preference name="phonegap-version" value="3.6.3" />
 </widget>
